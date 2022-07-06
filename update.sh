@@ -15,7 +15,8 @@ else
 cat $table
 echo enter your search key 
 read key
-id=`grep "$n" < $table | cut -s -d':' -f1 | grep -w "$n"`
+id=`grep "$key" < $table | cut -s -d':' -f1 | grep -w "$key"`
+echo $id
 if [ "$key" = "$id" ]
 then
 	head -1 $table > table
@@ -51,6 +52,7 @@ then
 		;;
 		*)
 		echo you enter error data
+		row=''
 		break
 		;;
 		esac
@@ -62,6 +64,7 @@ then
 		row+="$n:"
 		;;
 		*)
+		row=''
 		echo you enter error data
 		break
 		;;
@@ -77,9 +80,6 @@ echo change
 echo $row >> $table 
 fi
 fi
-
-
-
 rm file1
 
 

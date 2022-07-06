@@ -9,11 +9,24 @@ then
 	touch $table_name
 	echo enter your table primary Key first
 	read pk
-	echo -n "$pk:" >> $table_name
-
+	if [ -z $pk  ]
+	then	
+		echo must id right
+		rm $table_name
+		exit
+	else
+		echo -n "$pk:" >> $table_name
+	fi
 	echo enter your primary Key datatype 
 	read pk
-	echo -n "$pk:" >> $table_name
+	if [ "$pk" = "string" -o "$pk" = "int" ]
+	then
+		echo -n "$pk:" >> $table_name
+	else
+		echo datatype error must int or string 
+		rm $table_name
+		exit
+	fi
 	while true
 	do
 		echo enter the column
@@ -26,7 +39,15 @@ then
 		echo -n "$col:" >> $table_name
 		echo enter dataype int or string
 		read col
-		echo -n "$col:" >> $table_name
+		if [ "$col" = "string" -o "$col" = "int" ]
+		then
+			echo -n "$col:" >> $table_name
+		else
+			echo datatype error must int or string 
+			rm $table_name
+			break
+		fi
+		
 	done
 
 	

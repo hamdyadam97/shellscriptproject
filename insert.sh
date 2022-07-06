@@ -1,6 +1,7 @@
 #!/bin/bash
 shopt -s extglob
 typeset -i x
+row=''
 echo enter tablename
 read table
 ls > file1
@@ -14,7 +15,6 @@ else
 		head -1 $table > table
 		cat ./table
 		IFS=:$'\n' read -d '' -r -a arr < table
-		echo "${#arr[@]}"
 		for (( i=0; i<${#arr[@]}; i++ ))
 		do
 		echo enter data "${arr[$i]}"
@@ -23,11 +23,9 @@ else
 		then
 			echo primary key
 			id=`grep "$n" < $table | cut -s -d':' -f1 | grep -w "$n"`
-			echo $id
-			echo $n
 			if [ $n = "$id" ]
 				then
-				echo database is already exist
+				echo primarykey is already exist
 				break
 			fi
 		fi
@@ -37,25 +35,40 @@ else
 		then	
 			
 			case $n in
-			+([0-9]))echo digit
+			+([0-9]))
+			row=''
+			echo you enter error data
+			break
 			;;
-			+([A-Za-z0-9]))echo -n "$n:" >> $table 
+			+([A-Za-z0-9]))
+			row+="$n:"
 			;;
-			*)echo nothing
+			*)
+			echo you enter error data
+			row=''
+			break
 			;;
 			esac
 		fi
 		if [ $str = 'int' ]
 		then		
 			case $n in
-			+([0-9]))echo -n "$n:" >> $table 
+			+([0-9]))
+			row+="$n:"
 			;;
-			*)echo nothing
+			*)
+			echo you enter error data
+			row=''
+			break
 			;;
 			esac
 		fi
 		done
-		echo "" >> $table 
+		if [ "$row" != '' ]
+			then
+			echo change
+			echo $row >> $table 
+		fi
 		rm table
 fi
 rm file1

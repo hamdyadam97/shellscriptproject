@@ -11,7 +11,9 @@ else
 	echo enter your search key 
 	read key
 	cat $table
+	echo -------------------------
 	sed -i "/^$key/d" $table 
+	cat $table
 fi
 rm file1
 

@@ -8,13 +8,18 @@ case $REPLY in
 	read n
 	ls > file
 	database=`grep "\<$n\>" file`
-	if [ $n = "$database" ]
-		then
-		echo database is already exist
-		
+	if [ -z $n ]
+	then
+		echo must database right	
 	else
-		mkdir $n
-		echo database is crate
+		echo dsaaaaaaaaaaaaaaaaaaaaa
+		if [ $n = "$database" ]
+			then
+			echo database is already exist
+		else
+			mkdir $n
+			echo database is create
+		fi
 		
 	fi
 	rm file
@@ -30,44 +35,49 @@ case $REPLY in
 	ls > file
 	read n
 	database=`grep "\<$n\>" file`
-	if [ $n = "$database" ]
-	then		rm file 
-			cd $database
-			select cmd in "press 1 to create table" "press 2 list to table" "press 3 drop to table" " press 4 select " "press 5 to insert" "press 6 to update" "press 7 to dele form table" 				"press 8 to exit"
-			do
-			case $REPLY in
-			1)	
-				/home/hamdy/project/createtable.sh
-				
-				break 1
-				;;
-			2) /home/hamdy/project/listtable.sh
-				break 1
-				;;
-			3) /home/hamdy/project/droptable.sh
-				break 1
-				;;
-			4) /home/hamdy/project/select.sh
-				break 1
-				;;
-			5) /home/hamdy/project/insert.sh
-				break 1
-				;;
-			6) /home/hamdy/project/update.sh
-				break 1
-				;;
-			7) /home/hamdy/project/delete.sh
-				break 1
-				;;
-			8) 	exit
-				;;
-			*) 	echo $REPLY is not of option
-			;;
-			esac
-			done
+	if [ -z $n ]
+	then
+		echo database must right
 	else
-	echo database not here
-	rm file 
+		if [ $n = "$database" ]
+		then		rm file 
+				cd $database
+				select cmd in "press 1 to create table" "press 2 list to table" "press 3 drop to table" " press 4 select " "press 5 to insert" "press 6 to update" "press 7 to dele form table" 				"press 8 to exit"
+				do
+				case $REPLY in
+				1)	
+					/home/hamdy/project/createtable.sh
+					
+					break 1
+					;;
+				2) /home/hamdy/project/listtable.sh
+					break 1
+					;;
+				3) /home/hamdy/project/droptable.sh
+					break 1
+					;;
+				4) /home/hamdy/project/select.sh
+					break 1
+					;;
+				5) /home/hamdy/project/insert.sh
+					break 1
+					;;
+				6) /home/hamdy/project/update.sh
+					break 1
+					;;
+				7) /home/hamdy/project/delete.sh
+					break 1
+					;;
+				8) 	exit
+					;;
+				*) 	echo $REPLY is not of option
+				;;
+				esac
+					done
+		else
+			echo database not here
+			rm file 
+		fi
 	fi
 	break
 	;;
@@ -78,8 +88,10 @@ case $REPLY in
 	if [ $n = "$database" ]
 	then
 	rm -r  $database
+	echo dropped
 	continue 
 	else
+	echo database no here
 	continue 
 	fi
 	rm file
