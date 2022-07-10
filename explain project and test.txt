@@ -28,3 +28,24 @@ when connect databse if exist show anther select that treat with database like
 8-delete form table must insert primary key that are exists to dalete this col
 9-update form table must insert primary key that are exists to update this col and id must be not repeat
 10-select form table must insert primary key that are exists to search this col 
+
+
+
+
+
+
+
+
+
+-------------------------------------- 
+you must take care about url path for  all scripts
+home/hamdy/project
+1-insert  ---------home/hamdy/project
+2-update  ---------home/hamdy/project
+3-delete ---------home/hamdy/project
+4-list ---------home/hamdy/project
+5-drop  ---------home/hamdy/project
+6-create ---------home/hamdy/project
+7-select  ---------home/hamdy/project
+must update url for you
+ 
